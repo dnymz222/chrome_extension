@@ -13,12 +13,11 @@
                  var items = table.rows;
                  var length = items.length;
 
-                 var pageheader = document.getElementsByClassName('page-heading')[0];
-                 var  h1 = pageheader.getElementsByTagName('h1')[0];
-                 var title = h1.innerText;
+                 
+                 var title = '星座列表';
 
 
-                 var str = '名称,拜耳编号,佛氏编号,HD编号,HIP编号,赤经,赤纬,视星等,绝对星等,距离,光谱型,注释\n';
+                 var str = '名称,简写,拉丁名,面积,赤经,赤纬,象限,族,最亮星\n';
                  
                  for (i = 1;i < length; i++) {
 
@@ -27,30 +26,33 @@
                     var item = items[i];
 
                     var cells = item.cells;
-                     var hasgude = cells.length >12?1:0;
+                   
 
                     var name = cells[0].innerText;
 
-                    var baierorder = cells[1].innerText;
+                    var abb = cells[1].innerText;
                     var foshiorder = cells[2].innerText;
-                    var hdorder = cells[3+hasgude].innerText;
-                    var hiporder= cells[4+hasgude].innerText;
+                    var hdorder = cells[3].innerText;
+                    var hiporder= cells[4].innerText;
 
-                    var chiwei = cells[5+hasgude].innerText;
-                    var chijing= cells[6+hasgude].innerText;
+                    var chiwei = cells[5].innerText;
+                    var chijing= "";
+                   // cells[6].innerText;
 
-                    var shixingdeng= cells[7+hasgude].innerText;
-                    var jueduixingdeng = cells[8+hasgude].innerText;
-                    var distance = cells[9+hasgude].innerText;
 
-                    var guangpuxing = cells[10+hasgude].innerText;
-                    var zhushi= cells[11+hasgude].innerText;
+
+                    var shixingdeng="";
+                    // cells[7].innerText;
+
+                    var jueduixingdeng = "";
+                    //cells[8].innerText;
+                   
 
 
 
 
                     str += `${name + '\t'},`;   
-                    str += `${baierorder + '\t'},`;   
+                    str += `${abb+ '\t'},`;   
                     str += `${foshiorder + '\t'},`;  
                     str += `${hdorder + '\t'},`;    
                     str += `${hiporder + '\t'},`; 
@@ -58,9 +60,7 @@
                     str += `${chijing + '\t'},`;   
                     str += `${shixingdeng+ '\t'},`;   
                     str += `${jueduixingdeng + '\t'},`; 
-                    str += `${distance + '\t'},`;  
-                    str += `${guangpuxing+ '\t'},`;   
-                    str += `${zhushi+ '\t'},`;      
+                    
 
                     str += '\n';
 

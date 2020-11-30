@@ -9,69 +9,84 @@
             cab.onMessage.addListener(function(msg) {
                  // var t_titles = document.getElementByTagName("title") ;
                  var content = document.getElementById('bodyContent');
-                 var table = content.getElementsByTagName('table')[0];
-                 var items = table.rows;
-                 var length = items.length;
+                 var tables = content.getElementsByTagName('table');
+               
 
-                 var pageheader = document.getElementsByClassName('page-heading')[0];
+                 var pageheader = document.getElementById('content');
                  var  h1 = pageheader.getElementsByTagName('h1')[0];
                  var title = h1.innerText;
 
 
-                 var str = '名称,拜耳编号,佛氏编号,HD编号,HIP编号,赤经,赤纬,视星等,绝对星等,距离,光谱型,注释\n';
+
+
+                 var str = 'number,other name,obejecttype,constellation,RA,DC,AM\n';
+
+                 var tablecount = tables.length;
+
+                 for (var j = 0; j< tablecount; j++) {
+
+                   var table = tables[j];
+
+                   var items = table.rows;
+                   var length = items.length;
                  
-                 for (i = 1;i < length; i++) {
+                     for (i = 1;i < length; i++) {
 
-                    var dict = {};
+                        var dict = {};
 
-                    var item = items[i];
+                        var item = items[i];
 
-                    var cells = item.cells;
-                     var hasgude = cells.length >12?1:0;
+                        var cells = item.cells;
+                        if (cells.length < 7) continue;
+                        
 
-                    var name = cells[0].innerText;
+                        var name = cells[0].innerText;
 
-                    var baierorder = cells[1].innerText;
-                    var foshiorder = cells[2].innerText;
-                    var hdorder = cells[3+hasgude].innerText;
-                    var hiporder= cells[4+hasgude].innerText;
+                        var baierorder = cells[1].innerText;
+                        var foshiordercell = cells[2];
+                        var foshiorder  = foshiordercell.innerText;
+                        
 
-                    var chiwei = cells[5+hasgude].innerText;
-                    var chijing= cells[6+hasgude].innerText;
+                     
+                        
+                        
 
-                    var shixingdeng= cells[7+hasgude].innerText;
-                    var jueduixingdeng = cells[8+hasgude].innerText;
-                    var distance = cells[9+hasgude].innerText;
+                        var hdorder = cells[3].innerText;
+                        var hiporder= cells[4].innerText;
 
-                    var guangpuxing = cells[10+hasgude].innerText;
-                    var zhushi= cells[11+hasgude].innerText;
+                        var chiwei = cells[5].innerText;
+                        var chijing= cells[6].innerText;
 
-
-
-
-                    str += `${name + '\t'},`;   
-                    str += `${baierorder + '\t'},`;   
-                    str += `${foshiorder + '\t'},`;  
-                    str += `${hdorder + '\t'},`;    
-                    str += `${hiporder + '\t'},`; 
-                    str += `${chiwei + '\t'},`;  
-                    str += `${chijing + '\t'},`;   
-                    str += `${shixingdeng+ '\t'},`;   
-                    str += `${jueduixingdeng + '\t'},`; 
-                    str += `${distance + '\t'},`;  
-                    str += `${guangpuxing+ '\t'},`;   
-                    str += `${zhushi+ '\t'},`;      
-
-                    str += '\n';
+                       
 
 
-                 }
+
+
+                        str += `${name + '\t'},`;   
+                        str += `${baierorder + '\t'},`;   
+                        str += `${foshiorder + '\t'},`;  
+                        str += `${hdorder + '\t'},`;    
+                        str += `${hiporder + '\t'},`; 
+                        str += `${chiwei + '\t'},`;  
+                        str += `${chijing + '\t'},`;   
+                       
+
+                        str += '\n';
+
+
+                     }
 
                 
                  
 
+                   
+                 }
+
+
                  let uri = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str);
-                  //通过创建a标签实现
+                  
+
+                //过创建a标签实现
                   var link = document.createElement("a");
                   link.href = uri;
                   

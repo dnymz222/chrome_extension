@@ -13,7 +13,7 @@
                  var items = table.rows;
                  var length = items.length;
 
-                 var pageheader = document.getElementsByClassName('page-heading')[0];
+                 var pageheader = document.getElementById('content');
                  var  h1 = pageheader.getElementsByTagName('h1')[0];
                  var title = h1.innerText;
 

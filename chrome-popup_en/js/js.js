@@ -13,14 +13,14 @@
                  var items = table.rows;
                  var length = items.length;
 
-                 var pageheader = document.getElementsByClassName('page-heading')[0];
+                 var pageheader = document.getElementById('content');
                  var  h1 = pageheader.getElementsByTagName('h1')[0];
                  var title = h1.innerText;
 
 
-                 var str = '名称,拜耳编号,佛氏编号,HD编号,HIP编号,赤经,赤纬,视星等,绝对星等,距离,光谱型,注释\n';
+                 var str = '名称,简称,拜耳编号,HD编号,HIP编号,赤经,赤纬,视星等,绝对星等,距离,光谱型,链接\n';
                  
-                 for (i = 1;i < length; i++) {
+                 for (i = 1;i < length-1; i++) {
 
                     var dict = {};
 
@@ -29,7 +29,26 @@
                     var cells = item.cells;
                      var hasgude = cells.length >12?1:0;
 
-                    var name = cells[0].innerText;
+                    var cell0 = cells[0];
+
+                    var name = "";
+                    var link = "";
+
+                    var as = cell0.getElementsByTagName("a");
+                    if (as.length > 0) {
+                      var a = as[0];
+                      if (a.hasAttribute("title")) {
+                        name = a.getAttribute("title");
+                      };
+                       if (a.hasAttribute("href")) {
+                        link =  "https://en.wikipedia.org/wiki"+a.getAttribute("href");
+                      };
+
+                    };
+
+
+
+                    var shortname = cells[0].innerText;
 
                     var baierorder = cells[1].innerText;
                     var foshiorder = cells[2].innerText;
@@ -50,8 +69,8 @@
 
 
                     str += `${name + '\t'},`;   
-                    str += `${baierorder + '\t'},`;   
-                    str += `${foshiorder + '\t'},`;  
+                    str += `${shortname + '\t'},`;   
+                    str += `${baierorder + '\t'},`;  
                     str += `${hdorder + '\t'},`;    
                     str += `${hiporder + '\t'},`; 
                     str += `${chiwei + '\t'},`;  
@@ -60,7 +79,7 @@
                     str += `${jueduixingdeng + '\t'},`; 
                     str += `${distance + '\t'},`;  
                     str += `${guangpuxing+ '\t'},`;   
-                    str += `${zhushi+ '\t'},`;      
+                    str += `${link+ '\t'},`;      
 
                     str += '\n';
 

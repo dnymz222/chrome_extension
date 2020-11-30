@@ -13,14 +13,24 @@
                  var items = table.rows;
                  var length = items.length;
 
-                 var pageheader = document.getElementsByClassName('page-heading')[0];
+                 var pageheader = document.getElementById('content');
                  var  h1 = pageheader.getElementsByTagName('h1')[0];
                  var title = h1.innerText;
+
+                 var section0 = document.getElementById("mf-section-0")
+
+                 var ps0 = section0.getElementsByTagName("p")
+
+                 var section = document.getElementById("content-collapsible-block-0")
+
+                 var ps = section.getElementsByTagName("p")
+
+
 
 
                  var str = '名称,拜耳编号,佛氏编号,HD编号,HIP编号,赤经,赤纬,视星等,绝对星等,距离,光谱型,注释\n';
                  
-                 for (i = 1;i < length; i++) {
+                 for (i = 1;i < length-1; i++) {
 
                     var dict = {};
 
